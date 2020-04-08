@@ -10,7 +10,7 @@ namespace EnvironmentSetUp.Controllers
 {
     public class TestController : ApiController
     {
-        TestGateway sg = new TestGateway();
+        TestGateway  sg = new TestGateway();
 
         [HttpGet]
         [Route("api/Test/ID/")]
