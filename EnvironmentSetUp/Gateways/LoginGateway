@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 
 namespace EnvironmentSetUp.Gateways
 {
-    public class Gateway_Login
+    public class LoginGateway
     {
         public bool Login(int Id, string pass)
         {
