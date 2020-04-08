@@ -1,0 +1,25 @@
+using PharoahA.Gateways;
+using System;
+using System.Security.Cryptography;
+using System.Text;
+using System.Web.Http;
+
+namespace EnvironmentSetUp.Controllers
+{
+    public class UserController : ApiController
+    {
+        private LoginGateway loginGateway = new LoginGateway();
+
+        [HttpPost]
+        public bool LoginStudent(int NNumber, string Pass)
+        {
+            HashAlgorithm sha = new SHA256CryptoServiceProvider();
+            var data = Encoding.ASCII.GetBytes(Pass);
+            byte[] password = sha.ComputeHash(data);
+            string Password = Convert.ToBase64String(password);
+            return loginGateway.Login(NNumber, Password);
+        }
+
+
+    }
+}
