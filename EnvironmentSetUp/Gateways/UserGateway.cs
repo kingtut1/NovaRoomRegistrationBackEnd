@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace EnvironmentSetUp.Gateways
 {
@@ -10,6 +12,11 @@ namespace EnvironmentSetUp.Gateways
     {
         public bool Login(int Id, string pass)
         {
+            HashAlgorithm sha = new SHA256CryptoServiceProvider();
+            var data = Encoding.ASCII.GetBytes(pass);
+            byte[] password = sha.ComputeHash(data);
+            pass = Convert.ToBase64String(password);
+
             string SQLQuery = "SELECT Password FROM NovaRoomRegistrationTest.User where NNumber like " + Convert.ToString(Id) + " and Password Like '" + Convert.ToString(pass) + "'";
             string output = "";
             using (MySqlConnection connection = new MySqlConnection(SQL_String.GetRDSConnectionString()))
