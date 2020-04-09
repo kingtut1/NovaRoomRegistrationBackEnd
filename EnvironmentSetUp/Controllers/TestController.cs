@@ -12,6 +12,7 @@ namespace EnvironmentSetUp.Controllers
     {
         TestGateway sg = new TestGateway();
 
+
         [HttpGet]
         [Route("api/Test/ID/")]
         public string GetStudentPassword(int username)
