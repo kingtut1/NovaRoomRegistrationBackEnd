@@ -39,5 +39,18 @@ namespace EnvironmentSetUp.Gateways
             else
                 return false;
         }
+
+
+        public bool ChangePass(int Id, string newPass)
+        {
+            string SQLQuery = "UPDATE NovaRoomRegistrationTest.User SET Password = '" + newPass + "' where NNumber LIKE " + Convert.ToString(Id);
+            using (MySqlConnection connection = new MySqlConnection(SQL_String.GetRDSConnectionString()))
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(SQLQuery, connection);
+                command.ExecuteReader();
+            }
+            return Login(Id, newPass);
+        }
     }
 }

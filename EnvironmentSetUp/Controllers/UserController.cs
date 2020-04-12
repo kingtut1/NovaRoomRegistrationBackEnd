@@ -24,5 +24,17 @@ namespace EnvironmentSetUp.Controllers
             string Password = Convert.ToBase64String(password);
             return LoginGateway.Login(NNumber, Password);
         }
+
+
+        [HttpPost]
+        public bool ChangePassword(int NNumber, string newPassword)
+        {
+            HashAlgorithm sha = new SHA256CryptoServiceProvider();
+            var data = Encoding.ASCII.GetBytes(newPassword);
+            byte[] password = sha.ComputeHash(data);
+            string Password = Convert.ToBase64String(password);
+            return LoginGateway.ChangePass(NNumber, Password);
+        }
+
     }
 }
