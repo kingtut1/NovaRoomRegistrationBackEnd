@@ -10,13 +10,18 @@ namespace EnvironmentSetUp.Gateways
 {
     public class UserGateway
     {
-        public bool Login(int Id, string pass)
+
+        public string Hash (string Pass)
         {
             HashAlgorithm sha = new SHA256CryptoServiceProvider();
-            var data = Encoding.ASCII.GetBytes(pass);
+            var data = Encoding.ASCII.GetBytes(Pass);
             byte[] password = sha.ComputeHash(data);
-            pass = Convert.ToBase64String(password);
-
+            Pass = Convert.ToBase64String(password);
+            return Pass;
+        }
+        public bool Login(int Id, string pass)
+        {
+            pass = Hash(pass);
             string SQLQuery = "SELECT Password FROM NovaRoomRegistrationTest.User where NNumber like " + Convert.ToString(Id) + " and Password Like '" + Convert.ToString(pass) + "'";
             string output = "";
             using (MySqlConnection connection = new MySqlConnection(SQL_String.GetRDSConnectionString()))
@@ -43,7 +48,8 @@ namespace EnvironmentSetUp.Gateways
 
         public bool ChangePass(int Id, string newPass)
         {
-            string SQLQuery = "UPDATE NovaRoomRegistrationTest.User SET Password = '" + newPass + "' where NNumber LIKE " + Convert.ToString(Id);
+            newPass = Hash(newPass);
+            string SQLQuery = "UPDATE NovaRoomRegistrationTest.User SET Password = '" + newPass + "' where NNumber = " + Convert.ToString(Id);
             using (MySqlConnection connection = new MySqlConnection(SQL_String.GetRDSConnectionString()))
             {
                 connection.Open();
