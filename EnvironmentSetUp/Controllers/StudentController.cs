@@ -13,7 +13,7 @@ namespace EnvironmentSetUp.Controllers
     {
         private StudentGateway studentGateway = new StudentGateway();
         
-        [HttpPost]
+        [HttpGet]
         public Student GetStudent(int NNumber)
         {
             return studentGateway.GetStudent(NNumber);
