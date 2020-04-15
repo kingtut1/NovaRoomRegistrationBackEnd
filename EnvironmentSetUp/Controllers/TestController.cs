@@ -17,7 +17,8 @@ namespace EnvironmentSetUp.Controllers
         [Route("api/Test/ID/")]
         public string GetStudentPassword(int username)
         {
-            return "Hello World";
+            return "Hello";
+
             //return sg.GetStudent(username);
         }
     }
