@@ -289,6 +289,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BuildingFloor.cs" />
     <Compile Include="Models\Project.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

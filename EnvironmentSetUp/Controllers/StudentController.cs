@@ -12,12 +12,21 @@ namespace EnvironmentSetUp.Controllers
     public class StudentController : ApiController
     {
         private StudentGateway studentGateway = new StudentGateway();
-        
+
         [HttpGet]
+        [Route("api/GetStudent/{NNumber}")]
         public Student GetStudent(int NNumber)
         {
             return studentGateway.GetStudent(NNumber);
         }
+
+        [HttpGet]
+        [Route("api/GetBF/{NNumber}")]
+        public List<BuildingFloor> GetBF(int NNumber)
+        {
+            return studentGateway.GetBuildingFloors(NNumber);
+        }
+
 
     }
 }

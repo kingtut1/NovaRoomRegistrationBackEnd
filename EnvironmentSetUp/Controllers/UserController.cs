@@ -15,6 +15,7 @@ namespace EnvironmentSetUp.Controllers
 
 
         [HttpPost]
+        [Route("/api/Login/{NNumber}/{Pass}")]
         public bool LoginStudent(int NNumber, string Pass)
         {
             return LoginGateway.Login(NNumber, Pass);
@@ -22,6 +23,7 @@ namespace EnvironmentSetUp.Controllers
 
 
         [HttpPost]
+        [Route("/api/ChangePassword/{NNumber}/{newPassword}")]
         public bool ChangePassword(int NNumber, string newPassword)
         {
             return LoginGateway.ChangePass(NNumber, newPassword);
