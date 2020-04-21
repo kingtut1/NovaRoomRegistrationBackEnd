@@ -14,14 +14,14 @@ namespace EnvironmentSetUp.Controllers
         private StudentGateway studentGateway = new StudentGateway();
 
         [HttpGet]
-        [Route("api/GetStudent/{NNumber}")]
+        [Route("api/GetStudent")]
         public Student GetStudent(int NNumber)
         {
             return studentGateway.GetStudent(NNumber);
         }
 
         [HttpGet]
-        [Route("api/GetBF/{NNumber}")]
+        [Route("api/GetBF")]
         public List<BuildingFloor> GetBF(int NNumber)
         {
             return studentGateway.GetBuildingFloors(NNumber);

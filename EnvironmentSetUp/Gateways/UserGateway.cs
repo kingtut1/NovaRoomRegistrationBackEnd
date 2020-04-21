@@ -48,6 +48,7 @@ namespace EnvironmentSetUp.Gateways
 
         public bool ChangePass(int Id, string newPass)
         {
+            string Pass = newPass;
             newPass = Hash(newPass);
             string SQLQuery = "UPDATE NovaRoomRegistrationTest.User SET Password = '" + newPass + "' where NNumber = " + Convert.ToString(Id);
             using (MySqlConnection connection = new MySqlConnection(SQL_String.GetRDSConnectionString()))
@@ -56,7 +57,8 @@ namespace EnvironmentSetUp.Gateways
                 MySqlCommand command = new MySqlCommand(SQLQuery, connection);
                 command.ExecuteReader();
             }
-            return Login(Id, newPass);
+            
+            return Login(Id, Pass);
         }
     }
 }
