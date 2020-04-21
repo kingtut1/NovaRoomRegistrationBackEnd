@@ -10,6 +10,45 @@ namespace EnvironmentSetUp.Gateways
 {
     public class ProjectGateway
     {
+        public Room GetReservationByUsername(int NNumber)
+        {
+            string SQLQuery = "SELECT * from NovaRoomRegistrationTest.Project " +
+                "WHERE Occupant1 = " + NNumber + " || Occupant2 = " + NNumber + " || Occupant3 = " + NNumber + " || Occupant4 =" + NNumber;
+            Room output = new Room();
+            using (MySqlConnection connection = new MySqlConnection(SQL_String.GetRDSConnectionString()))
+            {
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(SQLQuery, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            output.RoomNumber = (int)reader["RoomNumber"];
+                            output.Price = (int)reader["Price"];
+                            if (reader["Occupant1"] == DBNull.Value)
+                                output.Occupant1 = null;
+                            else
+                                output.Occupant1 = (int)reader["Occupant1"];
+                            if (reader["Occupant2"] == DBNull.Value)
+                                output.Occupant2 = null;
+                            else
+                                output.Occupant2 = (int)reader["Occupant2"];
+                            if (reader["Occupant3"] == DBNull.Value)
+                                output.Occupant3 = null;
+                            else
+                                output.Occupant3 = (int)reader["Occupant3"];
+                            if (reader["Occupant4"] == DBNull.Value)
+                                output.Occupant4 = null;
+                            else
+                                output.Occupant4 = (int)reader["Occupant4"];
+                        }
+                    }
+                }
+
+            }
+            return output;
+        }
         public List<Room> GetAvailableRoomsByFloor(string BuildingName, int FloorNumber)
         {
             //Lines 16-57 checks for all rooms except for rooms with no null occupants to the listOfOutputs
